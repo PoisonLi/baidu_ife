@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ife-19</title>
+  <style type="text/css">
+    a{
+      padding: 6px;
+      text-decoration: none;
+      color: #000;
+      font-size: 12px;
+      border: 1px solid #ccc;
+    }
+    a:hover{
+      background-color: #EAE7E7;
+    }
+    span{
+      display: inline-block;
+      margin: 12px 4px 0;
+      padding: 4px;
+      color: red;
+      background-color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <input id="inp" type="text" name="">
+  <a id="leftE" href="javascript:">左侧入</a>
+  <a id="rightE" href="javascript:">右侧入</a>
+
+  <a id="leftO" href="javascript:">左侧出</a>
+  <a id="rightO" href="javascript:">右侧出</a>
+
+  <a id="sort-data" href="javascript:">进行排序</a>
+  <div id="num">
+
+  </div>
+  <script type="text/javascript">
+
+    function $(id){
+      return document.getElementById(id);
+    }
+    function re(){
+      var items = '';
+      for (var i = 0; i < data.length; i++) {
+        items += '<span style="padding-top:'+data[i]+'px" title="'+data[i]+'" data-index="'+i+'">'+data[i]+'</span>';
+      }
+      num.innerHTML = items;
+    }
+
+    var data = [];
+    var inp = $('inp');
+    var num = $('num');
+    var leftE = $('leftE');
+    var leftO = $('leftO');
+    var rightO = $('rightO');
+    var rightE = $('rightE');
+    var sortData = $('sort-data');
+    var nSpan = num.getElementsByTagName('span');
+
+    leftE.onclick = function(){
+      var val = inp.value;
+      if (data.length > 60) {
+        alert('最多添加60个');
+        return;
+      }
+      if (!(/^-?[1-9]\d*$/.test(val))) {
+        alert('请输入整数值!');
+        return;
+      }
+      if (val <= 10 || val >= 100) {
+        alert('请输入10—100之间的数');
+        return;
+      }
+      data.unshift(val);
+      re();
+    }
+    leftO.onclick = function(){
+      var lClear = data.shift();
+      re();
+      alert(lClear);
+    }
+    rightE.onclick = function(){
+      var val = inp.value;
+      if (data.length > 60) {
+        alert('最多添加60个');
+        return;
+      }
+      if (!(/^-?[1-9]\d*$/.test(val))) {
+        alert('请输入整数值!');
+        return;
+      }
+      if (val <= 10 || val >= 100) {
+        alert('请输入10—100之间的数');
+        return;
+      }
+      data.push(val);
+      re();
+    }
+    rightO.onclick = function(){
+      var rClear = data.pop();
+      re();
+      alert(rClear);
+    }
+
+    num.addEventListener('dblclick',function(event){
+      data.splice(event.target.dataset.index,1);
+      num.removeChild(event.target);
+    })
+
+    sortData.onclick = function(){
+
+      // for (var i = 0; i < data.length-1; i++) {
+      //   for(var j = 0; j < data.length-i-1; j++){
+      //     if (data[j] > data[j+1]) {
+      //       var m = data[j];
+      //       data[j] = data[j+1];
+      //       data[j+1] = m;
+      //       re();
+      //     }
+      //   }
+      // }
+
+      var i = 0,j = 1,temp;
+      var len = data.length;
+      var timer = null;
+      var timer = setInterval(run,25);
+      function run() {
+        if (i < len) {
+          if (j < len) {
+            if (data[i] > data[j]) {
+              temp = data[i];
+              data[i] = data[j];
+              data[j] = temp;
+              re();
+            }
+            j++;
+          }else{
+            i++;
+            j = i + 1;
+          }
+        }else{
+          clearInterval(timer);
+          return;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

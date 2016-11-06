@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ife-20</title>
+  <style type="text/css">
+    a{
+      padding: 6px;
+      text-decoration: none;
+      color: #000;
+      font-size: 12px;
+      border: 1px solid #ccc;
+    }
+    a:hover{
+      background-color: #EAE7E7;
+    }
+    span{
+      display: inline-block;
+      margin: 10px 10px 10px 0;
+      padding: 10px;
+      background-color: red;
+      color: #000;
+      cursor: pointer;
+    }
+    .high{
+      background: #5ACA77;
+    }
+  </style>
+</head>
+<body>
+  <textarea id="inp"></textarea>
+  <a id="leftE" href="javascript:">左侧入</a>
+  <a id="rightE" href="javascript:">右侧入</a>
+
+  <a id="leftO" href="javascript:">左侧出</a>
+  <a id="rightO" href="javascript:">右侧出</a>
+  <a id="search" href="javascript:">搜索</a>
+
+  <div id="num">
+
+  </div>
+
+  <script type="text/javascript">
+
+    function $(id){
+      return document.getElementById(id);
+    }
+    function re(){
+      var items = '';
+      for (var i = 0; i < data.length; i++) {
+        items += '<span data-index="'+i+'">'+data[i]+'</span>';
+      }
+      num.innerHTML = items;
+    }
+
+    var data = [];
+    var inp = $('inp');
+    var num = $('num');
+    var leftE = $('leftE');
+    var leftO = $('leftO');
+    var rightO = $('rightO');
+    var rightE = $('rightE');
+    var search = $('search');
+    var nSpan = num.getElementsByTagName('span');
+
+    leftE.onclick = function(){
+      var val = inp.value;
+      if (data.length > 60) {
+        alert('最多添加60个');
+        return;
+      }
+      if (!(/^-?[1-9]\d*$/.test(val))) {
+        alert('请输入整数值!');
+        return;
+      }
+      if (val < 10 || val > 100) {
+        alert('请输入10—100之间的数');
+        return;
+      }
+      data.unshift(val);
+      re();
+    }
+    leftO.onclick = function(){
+      var lClear = data.shift();
+      re();
+      alert(lClear);
+    }
+    rightE.onclick = function(){
+      var val = inp.value;
+      if (data.length > 60) {
+        alert('最多添加60个');
+        return;
+      }
+      if (!(/^-?[1-9]\d*$/.test(val))) {
+        alert('请输入整数值!');
+        return;
+      }
+      if (val < 10 || val > 100) {
+        alert('请输入10—100之间的数');
+        return;
+      }
+      data.push(val);
+      re();
+    }
+    rightO.onclick = function(){
+      var rClear = data.pop();
+      re();
+      alert(rClear);
+    }
+
+    search.onclick = function(){
+      var str = inp.value.trim();
+      var reg = new RegExp(str);
+      var numc = num.children;
+      for (var i = 0; i < numc.length; i++) {
+        numc[i].className = '';
+        var match = reg.exec(numc[i].innerHTML);
+        if (match) {
+          numc[i].classList.add('high');
+        }
+      }
+    }
+
+    num.addEventListener('dblclick',function(event){
+      data.splice(event.target.dataset.index,1);
+      num.removeChild(event.target);
+      alert(event.target.innerText);
+    })
+
+  </script>
+</body>
+</html>
