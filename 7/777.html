@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>新世界</title>
+		<link rel="stylesheet" type="text/css" href="7c.css" />
+	</head>
+	<script type="text/javascript">
+		window.onload=function(){
+			var menubar=document.getElementById("menubar");
+			var more=document.getElementById("more");
+			var owrap=document.getElementById("owrap");
+			var top=document.getElementById("btop");
+			more.onclick=fmore;
+			owrap.onclick=fwrap;
+			backTop(top);
+		}
+		//侧边栏
+		function fmore(){
+			var menubar=document.getElementById("menubar");
+			menubar.style.right="0px";
+			owrap.style.display="block";
+		}
+		function fwrap(){
+			var menubar=document.getElementById("menubar");
+			menubar.style.right="";
+			owrap.style.display="none";
+		}
+		function backTop(btn){
+			window.onscroll=set;
+			function set(){
+				if ((document.documentElement.scrollTop||document.body.scrollTop)>800) {
+					btn.style.display="block";
+				}else{
+					btn.style.display="none";
+				}
+			}
+			btn.onclick=function(){
+				btn.style.display="none";
+				window.onscroll=null;
+				this.timer=setInterval(function(){
+					if(document.body.scrollTop){
+						document.body.scrollTop -= Math.ceil(document.body.scrollTop * 0.1);
+					}else{
+						document.documentElement.scrollTop -= Math.ceil(document.documentElement.scrollTop * 0.1);
+					}
+					if (document.body.scrollTop==0){
+						clearInterval(btn.timer);
+						window.onscroll=set;
+						document.body.scrollTop=0;
+					}
+				},20);
+			}
+		}
+	</script>
+	<body>
+		<div class="wrap">
+		<div id="owrap"></div>
+			<div class="head">
+				<div class="logo">
+					<img src="img/header_1.jpg" />
+					<span class="world">新世界</span>
+				</div>
+				<div class="nvb">
+					<ul>
+						<li>首页</li>
+						<li><a href="file:///C:/Documents%20and%20Settings/Administrator/%E6%A1%8C%E9%9D%A2/mooc/xDog/index.html" target="_blank">爱心社区</a></li>
+						<li id="more">关于我们</li>
+						<li><a class="join" href="#">登录</a></li>
+					</ul>
+				</div>
+				<div id="menubar">
+						<a href="#">侧边栏1</a>
+						<a href="#">侧边栏2</a>
+						<a href="#">侧边栏3</a>
+						<a href="#">侧边栏4</a>
+						<a href="#">侧边栏5</a>
+				</div>
+			</div>
+			<div class="main">
+				<div class="taste">
+					<div class="ttext">
+						<h1>Time of new life</h1>
+						<p>新时代，年轻的人们让我们一起<br />
+						体验新生活，享受新生活</p>
+						<input type="button" value="开始体验" />
+					</div>
+					<div class="ttext_2">
+						<ul>
+							<li class="t_1"><img src="img/circle.png" /><span>打造全新世界观，让你更爱你的生活</span></li>
+							<li class="t_2"><img src="img/flag.png" /><span>丰富多彩的公益活动，发挥新世界的主人公意识</span></li>
+							<li class="t_3"><img src="img/flower.png"/><span>时尚的新理念，超前体验未知的生活</span></li>
+							<li class="t_4"><img src="img/square.png" /><span style="border: none;">完善的培养机制，培养你全新的世界观</span></li>
+						</ul>
+					</div>
+				</div>
+				<div class="about">
+					<img src="img/new.png" />
+					<p>关于新世界，你不知道的还有什么？</p>
+				</div>
+				<div class="map">
+					<h1>查找新世界城市活动信息<br />一</h1>
+					<p>每个城市都有不同的活动信息，请自主查询您所需要了解的城市</p>
+					<form>
+						<select name="国家">
+							<option value="国家"> 国家</option>
+							<option value="中国"> 中国</option>
+							<option value="美国"> 美国</option>
+							<option value="日本"> 日本</option>
+						</select>
+						<select name="省份">
+							<option value="省份"> 省份</option>
+							<option value="北京"> 北京</option>
+							<option value="上海"> 上海</option>
+							<option value="浙江"> 浙江</option>
+						</select>
+						<select name="城市">
+							<option value="城市"> 城市</option>
+							<option value="北京"> 北京</option>
+							<option value="上海"> 上海</option>
+							<option value="杭州"> 杭州</option>
+						</select>
+						<input type="submit" value="搜     索" name="搜索"/>
+					</form>
+				</div>
+				<div class="party">
+					<div class="party_1">
+						<div class="party_1bj">
+							<img src="img/pic_14.jpg" />
+							<h4>北京活动</h4>
+							<p>新社区大联盟</p>
+						</div>
+						<div class="party_1sh">
+							<h4>上海活动</h4>
+							<p>夜上海景观探索</p>
+							<img src="img/pic_20.jpg" />
+						</div>
+						<div class="party_1sz">
+							<img src="img/pic_17.jpg" />
+							<h4>深圳活动</h4>
+							<p>全新海岸线观点站</p>
+						</div>
+						<div class="party_1hk">
+							<img src="img/pic_11.jpg" />
+							<h4>香港活动</h4>
+							<p>奢侈消费大派送</p>
+						</div>
+					</div>
+					<div class="time">
+						<div class="time_left">
+							<h2>新世界</h2>
+							<h1>TIME</h1>
+							<h3>@新世界-北京</h3>
+							<h3>2016.04.01</h3>
+						</div>
+						<div class="time_right">
+							<h1>新世界/<span>01</span></h1>
+							<p>新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界新世界</p>
+							<input type="button" name="更多" value="更多详情"/>
+							<img src="img/point.png" />
+						</div>
+					</div>
+					<div class="more">
+						<ul>
+							<li class="more11">
+								<p>新时代<br />关于爱生活的我们</p>
+								<hr />
+								<input type="button" name="more1" value="查看更多"/>
+							</li>
+							<li class="more22">
+								<p>新时代<br />关于爱生活的我们</p>
+								<hr />
+								<input type="button" name="more2" value="查看更多"/>
+							</li>
+							<li class="more33"></li>
+						</ul>
+					</div>
+				</div>
+				<div class="jw">
+					<div class="we">
+						<div class="we_top">
+							<h1>成为我们的志愿者</h1>
+							<hr />
+							<p>新世界的大家庭需要每一个爱生活的人的加入，如果你够年轻，有梦想，有激情<br />那就不要犹豫，快来加入我们，成为改变所有人生活的人</p>
+						</div>
+						<div class="we_left">
+							<ul>
+								<li>
+									<h3>新世界志愿者协议</h3>
+									<p>加入新世界资源者的人员必须遵守中华人民共和国的相关法律法规，并且本着平等资源的原则......</p>
+									<span><img src="img/arrow.png" />more</span>
+								</li>
+								<li>
+									<h3>新世界志愿者权利</h3>
+									<p>新世界志愿者享受新世界内部所有资源共享的权利，并且享受所在地新世界的优先参与资格</p>
+									<span><img src="img/arrow.png" />more</span>
+								</li>
+								<li>
+									<h3>更多条款</h3>
+									<span><img src="img/arrow.png" />more</span>
+								</li>
+							</ul>
+						</div>
+						<div class="we_right">
+							<form>
+								<input type="text" class="napa" name="name" placeholder="  姓名:"/>
+								<input type="text"  class="napa" name="age" placeholder="  年龄:"/>
+								<br />
+								<input type="text"  class="napa" name="phone" placeholder="  联系方式:"/>
+								<input type="text"  class="napa" name="address" placeholder="  联系地址:"/>
+								<br />
+								<input type="text" class="ta" name="about" placeholder="  请简单描述您梦想的生活:"/>
+								<br />
+								<input type="submit" class="send" name="send" value="提交申请"/>
+							</form>
+						</div>
+					</div>
+					<div class="callme">
+						<h1>联系我们</h1>
+						<p>为了更好的获取我们最新的产品资讯，您可以留下您的电子邮箱快速订阅我们的产品资讯<br />也可以通过以下任何方式关注我们的动态</p>
+						<input type="text" class="em"name="send2" placeholder=" someone@email.com"/>
+						<input type="submit" class="sendme"name="send3" value="提 交"/>
+						<br />
+						<img src="img/qq.png" />
+						<img src="img/weibo.png" />
+						<img src="img/twitter.png" />
+						<img src="img/web.png" />
+					</div>
+				</div>
+			</div>
+			<div class="foot">
+				<span>©2016新世界 - BROCCOLI</span>
+			</div>
+			<button id="btop">返回顶部</button>
+		</div>
+	</body>
+</html>
