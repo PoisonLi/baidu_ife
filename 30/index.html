@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证 ife-30</title>
+	<style type="text/css">
+		body{
+			font-family: '微软雅黑';
+		}
+		.warp{
+			margin: 20px 0 0 50px;
+		}
+		label{
+			font-size: 14px;
+			cursor: pointer;
+		}
+		.pro{
+			margin: 4px 0 10px 46px;
+			font-size: 12px;
+		}
+		.pro.nor{
+			color: #A2A0A0;
+		}
+		.pro.warn{
+			color: #E81212;
+		}
+		.pro.cor{
+			color: #1EB323;
+		}
+		.text{
+			padding: 4px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+		#btn{
+			margin-left: 160px;
+			padding: 8px 16px;
+			background-color: #3D93FD;
+			letter-spacing: 1px;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		.text.warn{
+			border:1px solid red;
+			outline: none;
+			box-shadow: 0 0 4px #E81212;
+		}
+		.text.cor{
+			border:1px solid #1EB323;
+			outline: none;
+			box-shadow: 0 0 4px #1EB323;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var text = document.getElementsByClassName('text');
+			var pro = document.getElementsByClassName('pro');
+			var btn = document.getElementById('btn');
+
+			var arr = ['必填，长度为4~16个字符','请输入密码','请确认密码','请输入邮箱','请输入手机号'];
+			var count = null;
+
+			for (var i = 0; i < text.length; i++) {
+				text[i].index = i;
+
+				text[i].onfocus = function(){
+					pro[this.index].innerHTML = arr[this.index];
+				}
+
+				text[i].onblur = function(){
+					var inputValue = this.value.trim();
+					//去掉最前最后的空格
+					if (countLength(inputValue) < 4 || countLength(inputValue) > 16) {
+						//判断长度是否在4-16之间
+						pro[this.index].innerHTML = '输入错误';
+						pro[this.index].className = 'pro warn';
+						text[this.index].className = 'text warn';
+					}else{
+						pro[this.index].innerHTML = '输入正确';
+						pro[this.index].className = 'pro cor';
+						text[this.index].className = 'text cor';
+					}
+				}
+			}
+
+			function countLength(str){
+				var inputLength = 0;
+				//给一个变量来记录长度
+				for (var i = 0; i < str.length; i++) {
+					var countCode = str.charCodeAt(i);
+					//返回指定位置的字符的Unicode编码
+					//判断是不是ASCII码,Unicode码前128个字符是ASCII码
+					if (countCode >= 0 && countCode <= 128) {
+						inputLength ++;
+					}else{
+						inputLength +=2;
+						//如果是扩展码，则一次+2
+					}
+				}
+				return inputLength;
+			}
+
+			btn.onclick = function(){
+				count = 0;
+				for (var i = 0; i < pro.length; i++) {
+					if (pro[i].innerHTML === '输入错误') {
+						count++;
+					}
+				}
+				if (count == 0) {
+					alert('提交成功！');
+				}else{
+					alert('提交失败！')
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="warp">
+		<label>
+			名称：
+			<input class="text" type="text" placeholder="name">
+		</label>
+		<div class="pro nor"></div>
+
+		<label>
+			密码：
+			<input class="text" type="text" placeholder="password">
+		</label>
+		<div class="pro nor"></div>
+
+		<label>
+			确认密码：
+			<input class="text" type="text">
+		</label>
+		<div class="pro nor"></div>
+
+		<label>
+			邮箱：
+			<input class="text" type="email" placeholder="email">
+		</label>
+		<div class="pro nor"></div>
+
+		<label>
+			手机：
+			<input class="text" type="tel" placeholder="tel">
+		</label>
+		<div class="pro nor"></div>
+
+		<input id="btn" type="button" value="提交">
+	</div>
+</body>
+</html>
